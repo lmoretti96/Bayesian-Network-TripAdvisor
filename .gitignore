@@ -104,4 +104,4 @@ venv.bak/
 .mypy_cache/
 .vscode/settings.json
 Traccia_Progetto/.DS_Store
-contents_only.txt
+contents_only.csv

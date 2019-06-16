@@ -7,9 +7,9 @@ def readContent(file):
     regex = re.compile('(<Content>)(.*)')
     results = regex.findall(data)
     for result in results:
-        file_out.write(result[1] + "\n")
-
-file_out = open("contents_only.txt", 'w')
+        file_out.write("\"" + result[1] + "\"" + ";" + "\n")
+            
+file_out = open("contents_only.csv", 'w')
 
 for file in os.listdir('Dataset/Training/'):
     print(file)
