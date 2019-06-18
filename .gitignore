@@ -105,3 +105,4 @@ venv.bak/
 .vscode/settings.json
 Traccia_Progetto/.DS_Store
 contents_only.csv
+reviews_output.csv
