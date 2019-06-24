@@ -1,21 +1,21 @@
 import re
 import os
+import csv
 
 def readContent(file):
-    with open('Dataset/Training/' + file, errors='ignore') as dat_file:
-        data = dat_file.read()
-    regex = re.compile('(<Content>)(.*)')
-    results = regex.findall(data)
-    for result in results:
-        file_out.write("\"" + result[1] + "\"" + ";" + "\n")
-            
-file_out = open("contents_only.csv", 'w')
+  with open('Dataset/Training/' + file, errors='ignore') as dat_file:
+    data = dat_file.read()
+  
+  regex = re.compile('(<Content>)(.*)')
+  results = regex.findall(data)
 
-for file in os.listdir('Dataset/Training/'):
+  return results
+
+with open('tmp-returns.csv', 'w') as f:
+  writer = csv.writer(f)
+  
+  for file in os.listdir('Dataset/Training/'):
     print(file)
-    readContent(file)
-
-file_out.close()
-
-
-
+    
+    content = readContent(file)[0][1]
+    writer.writerow([content])
