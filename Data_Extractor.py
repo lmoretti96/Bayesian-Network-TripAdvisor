@@ -1,9 +1,11 @@
+#!/usr/bin/env python
+
 import re
 import os
 import csv
 
 def readContent(file):
-  with open('Dataset/Training/' + file, errors='ignore') as dat_file:
+  with open('Dataset/Training/' + file) as dat_file:
     data = dat_file.read()
   
   regex = re.compile('(<Content>)(.*)')
@@ -11,7 +13,7 @@ def readContent(file):
 
   return results
 
-with open('tmp-returns.csv', 'w') as f:
+with open('contents_only.csv', 'w') as f:
   writer = csv.writer(f)
   
   for file in os.listdir('Dataset/Training/'):
