@@ -17,5 +17,6 @@ with open('tmp-returns.csv', 'w') as f:
   for file in os.listdir('Dataset/Training/'):
     print(file)
     
-    content = readContent(file)[0][1]
-    writer.writerow([content])
+    content = readContent(file)
+    for element in content:
+      writer.writerow([element[1]])
