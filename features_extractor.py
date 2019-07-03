@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+
+
 import re
 import csv
 import json
@@ -15,9 +18,10 @@ def extract_features(file):
     #divido il file delle recensioni per ogni recensione eliminando il preambolo generale sull'hotel
     reviews = data.split('<Author>')
     reviews.pop(0)
-
+    
     #creo il vettore feature per ogni recensione
     for review in reviews:
+        listRev=[]
         current_features = {}
 
         #trovo il content della recensione
@@ -33,9 +37,15 @@ def extract_features(file):
         #estraggo il valore dei metadati
         for metadata in metadatas:
             current_features[metadata] = re.compile('<' + metadata + '>(.*)').findall(review)[0]
-
+        listRev.append(current_features)
+        #print(str(current_features))
         #scrivo sull'output il vettore features
         output_file.write(json.dumps(current_features) + "\n")
+        with open("output.csv","a+",newline="") as f:  # python 2: open("output.csv","wb")
+            title = "great,good,nice,clean,excellent,helpful,comfortable,beautiful,wonderful,friendly,fantastic,bad,Overall,Value,Rooms,Location,Cleanliness,Check in / front desk,Service,Business service".split(",") # quick hack
+            cw = csv.DictWriter(f,title,delimiter=',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+            #cw.writeheader()
+            cw.writerows(listRev)
 
 #creo il file di output
 output_file = open("reviews_output.csv", 'w')
