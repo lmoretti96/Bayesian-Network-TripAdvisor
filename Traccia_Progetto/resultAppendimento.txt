@@ -1,0 +1,35 @@
+
+[
+  [
+    "good",
+    "Rooms"
+  ],
+  [
+    "nice",
+    "friendly"
+  ],
+  [
+    "Location",
+    "nice"
+  ],
+  [
+    "comfortable",
+    "nice"
+  ],
+  [
+    "nice",
+    "wonderful"
+  ],
+  [
+    "nice",
+    "bad"
+  ],
+  [
+    "nice",
+    "Cleanliness"
+  ],
+  [
+    "comfortable",
+    "Cleanliness"
+  ]
+]
