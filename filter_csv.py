@@ -2,6 +2,6 @@
 
 import csv
 
-reader = csv.reader(open(r"features.csv"),delimiter=',')
-filtered = filter(lambda p: '-1' != p[12] and  '-1' != p[13] and  '-1' != p[14] and '-1' != p[15] and  '-1' != p[16] and  '-1' != p[17] and  '-1' != p[18] and  '-1' != p[19]  , reader)
-csv.writer(open(r"features_filtrato.csv",'w'),delimiter=',').writerows(filtered)
+reader = csv.reader(open(r"test.csv"),delimiter=',')
+filtered = filter(lambda p: '-1' != p[6] and  '-1' != p[7] and  '-1' != p[8] and '-1' != p[9] and  '-1' != p[10] and  '-1' != p[11] and  '-1' != p[12] and  '-1' != p[13]   , reader)
+csv.writer(open(r"test_filtrato.csv",'w'),delimiter=',').writerows(filtered)

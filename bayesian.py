@@ -54,7 +54,7 @@ for score in range(1,6):
     target = []
     pred = []
     #load testing dataset into a dataframe
-    testdf = pd.read_csv("test-valid.csv",  sep = ",")
+    testdf = pd.read_csv("test-filtrato.csv",  sep = ",")
     #selecting row with a certain overall value
     testdf = testdf[testdf["Overall"] == score]
     print(len(testdf))
@@ -72,6 +72,8 @@ for score in range(1,6):
         Location = int(testdf.iloc[i]["Location"])
         Service = int(testdf.iloc[i]["Service"])
         Cleanliness = int(testdf.iloc[i]["Cleanliness"])
+        CheckIn = int(testdf.iloc[i]["CheckIn"])
+        Businessservice = int(testdf.iloc[i]["Businessservice"])
         Value = int(testdf.iloc[i]["Value"])
         Overall = int(testdf.iloc[i]["Overall"])
         #append the overall score to the target list
@@ -80,7 +82,7 @@ for score in range(1,6):
         a = TableCPDFactorization(res)
         #compute the query and evidences as dicts
         query = dict(Overall=Overall)
-        evidence = dict(Service = Service, Location = Location, Cleanliness = Cleanliness, Value = Value, bad = bad, good = good, Rooms = Rooms, great =great, comfortable = comfortable, small = small, old = old)
+        evidence = dict(CheckIn=CheckIn,Businessservice=Businessservice,Service = Service, Location = Location, Cleanliness = Cleanliness, Value = Value, bad = bad, good = good, Rooms = Rooms, great =great, comfortable = comfortable, small = small, old = old)
         #run the query given evidence
         result = a.condprobve(query, evidence)
         #choose the max probability ditribution as model prediction
