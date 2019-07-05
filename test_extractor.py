@@ -7,7 +7,7 @@ import os
 
 def extract_features(file):
     #apro il file delle recensioni di un hotel
-    with open('Dataset/Training/' + file, errors='ignore') as dat_file:
+    with open('Dataset/Testing/' + file, errors='ignore') as dat_file:
             data = dat_file.read()
 
     #divido il file delle recensioni per ogni recensione eliminando il preambolo generale sull'hotel
@@ -30,10 +30,11 @@ def extract_features(file):
 
         #estraggo il valore dei metadati
         for metadata in metadatas:
+            #print(metadata)
             current_features[metadata] = re.compile('<' + metadata + '>(.*)').findall(review)[0]
 
         #scrivo i valori per ogni recensione
-        with open('features.csv', 'a') as output_file:
+        with open('test.csv', 'a') as output_file:
             writer = csv.writer(output_file)
             writer.writerow(current_features.values())
 
@@ -51,11 +52,11 @@ with open("keywords_prova.csv") as csv_file:
 feature_words = good_keyworks + bad_keyworks
 
 #creo il file di output e stampo l'header
-with open("features.csv" , 'w') as output_file:
+with open("test.csv" , 'w') as output_file:
     writer = csv.writer(output_file)
     writer.writerow(feature_words + metadatas)
 
 #apro ad uno ad uno i file della cartella training
-for file in os.listdir('Dataset/Training/'):
+for file in os.listdir('Dataset/Testing/'):
     print(file)
     extract_features(file)
