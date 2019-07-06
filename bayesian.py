@@ -27,31 +27,33 @@ def format_data(df):
        #    Checkin=row.Checkin, Service=row.Service, Rooms=row.Rooms, Value=row.Value, Overall=row.Overall ))
     return result
 #load all preprocessed training data
-df = pd.read_csv('./features.csv', sep=',')
+df = pd.read_csv('./features_filtrato.csv', sep=',')
 #format data to let them correctly processed by libpgm functions
 node_data = format_data(df)
 
 skel = GraphSkeleton()
 #load structure of our net
-skel.load("./skel-learned.txt")
+#skel.load("./skel-learned.txt")
 #setting the topologic order
-skel.toporder()
+#skel.toporder()
 #learner which will estimate parameters e if needed net structure
 learner = PGMLearner()
 
 #estismting parameters for our own model
-res = learner.discrete_mle_estimateparams(skel, node_data)
+#res = learner.discrete_mle_estimateparams(skel, node_data)
 
-with open("rete.csv", "a") as gv:
-  gv.write(json.dumps(res.E, indent=2))
-  gv.write(json.dumps(res.Vdata, indent=2))  
+
 
 #estimating net structure given training data and paramenters this is an alternative to create a new model on our data
-#net = learner.discrete_estimatebn(node_data)
-#print json.dumps(net.V, indent=2)
-#print json.dumps(net.E, indent=2)
-#res = learner.discrete_mle_estimateparams(net, node_data)
-#print(str(res))
+net = learner.discrete_estimatebn(node_data)
+
+with open("reteTest.csv", "a") as gv:
+  gv.write(json.dumps(net.V, indent=2))
+  gv.write(json.dumps(net.E, indent=2))  
+res = learner.discrete_mle_estimateparams(net, node_data)
+with open("modello.csv", "a") as gv:
+  gv.write(json.dumps(res.E, indent=2))
+  gv.write(json.dumps(res.Vdata, indent=2))  
 
 #compute performances for each oveall score
 for score in range(1,6):
