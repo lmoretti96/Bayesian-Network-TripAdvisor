@@ -6,7 +6,7 @@ import json
 import os
 
 def extract_features(file):
-    with open('features.csv', 'a') as output_file:
+    with open('feature_meta.csv', 'a') as output_file:
         #apro il file delle recensioni di un hotel
         with open('Dataset/Training/' + file, errors='ignore') as dat_file:
                 data = dat_file.read()
@@ -41,6 +41,8 @@ def extract_features(file):
 #lista dei metadati che voglio estrarre
 metadatas = ["Overall", "Value", "Rooms", "Location", "Cleanliness", "Service","Business service","Check in / front desk"]
 
+# "Business service"
+# "Check in / front desk"
 
 #apro il file delle parole più frequenti buone e cattive
 with open("keywords_prova.csv") as csv_file:
@@ -50,7 +52,7 @@ with open("keywords_prova.csv") as csv_file:
 feature_words = good_keyworks + bad_keyworks
 
 #creo il file di output e stampo l'header
-with open("features.csv" , 'w') as output_file:
+with open("feature_meta.csv" , 'w') as output_file:
     writer = csv.writer(output_file)
     writer.writerow(feature_words + metadatas)
 

@@ -1,0 +1,23 @@
+TRAIN
+    
+CLASSE: NUMERO RIGHE    
+
+classe1 : 4651 
+classe2 : 7070
+classe3 : 9326
+classe4 : 28277
+classe5 : 45588
+
+TEST
+
+CLASSE: NUMERO RIGHE    ---> azzeccati (modello indotto) -- azzeccati (modello nostro) -- azzeccati (modello indotto solo metadati)
+
+classe1 : 1501  --> 756  (14%)   -- 4    (0,3%)  -- 
+classe2 : 2097  --> 0    (0%)    -- 1258 (60%)   -- 
+classe3 : 2770  --> 0    (0%)    -- 1662 (60%)   --
+classe4 : 7370  --> 4053 (55%)   -- 1916 (26%)   -- 
+classe5 : 7853  --> 31   (0,4%)  -- 0    (0%)    -- 
+
+tot:    : 18.821‬--> 4840 (26%)   -- 2924 (16%)   --
+
+
