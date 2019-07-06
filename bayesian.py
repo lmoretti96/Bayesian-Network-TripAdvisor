@@ -42,7 +42,9 @@ learner = PGMLearner()
 
 #estismting parameters for our own model
 res = learner.discrete_mle_estimateparams(skel, node_data)
-
+with open("modelloNuovo.csv", "a") as gv:
+  gv.write(json.dumps(res.E, indent=2))
+  gv.write(json.dumps(res.Vdata, indent=2))  
 
 """
 #estimating net structure given training data and paramenters this is an alternative to create a new model on our data
