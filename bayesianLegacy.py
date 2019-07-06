@@ -7,19 +7,6 @@ from libpgm.graphskeleton import GraphSkeleton
 from libpgm.pgmlearner import PGMLearner
 from libpgm.tablecpdfactorization import TableCPDFactorization
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
-from libpgm.discretebayesiannetwork import DiscreteBayesianNetwork
-
-
-def GetRealValueLast(val):
-    return {
-      0:2, 
-      1:4, 
-      2:3, 
-      3:5, 
-      4:1
-    }[val]
-
-
 #Defining formatting data method
 def format_data(df):
     result = []
@@ -42,7 +29,6 @@ def format_data(df):
 #load all preprocessed training data
 df = pd.read_csv('features.csv', sep=',')
 
-
 #format data to let them correctly processed by libpgm functions
 node_data = format_data(df)
 
@@ -53,7 +39,6 @@ skel.load("./skel-learned2.txt")
 skel.toporder()
 #learner which will estimate parameters e if needed net structure
 learner = PGMLearner()
-
 
 #estismting parameters for our own model
 res = learner.discrete_mle_estimateparams(skel, node_data)
@@ -105,24 +90,19 @@ for score in range(1,6):
         a = TableCPDFactorization(res)
         #compute the query and evidences as dicts
         query = dict(Overall=Overall)
-        evidence = dict(Service = Service, Location = Location, Cleanliness = Cleanliness, Value = Value,bad=bad,Rooms=Rooms,old=old,good=good,great=great,comfortable=comfortable)
+        evidence = dict(Service = Service, Location = Location, Cleanliness = Cleanliness, Value = Value)
         #Checkin=Checkin,Businessservice=Businessservice 
         #run the query given evidence
         result = a.condprobve(query, evidence)
-        #result2 = a.specificquery(query, evidence)
-        #print(result2)
-        #print json.dumps(result.vals, indent=2)
         #choose the max probability ditribution as model prediction
         maxvalue = max(result.vals)
-
-        pos = GetRealValueLast(result.vals.index(maxvalue))
-    
+        pos = result.vals.index(maxvalue)
         #append it to our prediction list
         pred.append(pos + 1)
         print(count)
         count = count + 1
     #print performances on the performances.csv file
-    with open("performances3.csv", "a") as f:
+    with open("performancesMeta.csv", "a") as f:
         f.write("ACCURACY of the "+str(score)+"th score: "+str(accuracy_score(target, pred))+'\n')
         f.write("PRECISION of the "+str(score)+"th score: "+str(precision_score(target, pred, average = 'macro'))+'\n')
         f.write("RECALL of the "+str(score)+"th score: "+str(recall_score(target, pred, average = 'macro'))+'\n')
