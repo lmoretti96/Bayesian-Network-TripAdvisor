@@ -90,10 +90,11 @@ for score in range(1,6):
         a = TableCPDFactorization(res)
         #compute the query and evidences as dicts
         query = dict(Overall=Overall)
-        evidence = dict(Service = Service, Location = Location, Cleanliness = Cleanliness, Value = Value)
+        evidence = dict(Service = Service, Location = Location, Cleanliness = Cleanliness, Value = Value,bad=bad,Rooms=Rooms,old=old,good=good,great=great,comfortable=comfortable)
         #Checkin=Checkin,Businessservice=Businessservice 
         #run the query given evidence
         result = a.condprobve(query, evidence)
+        #print json.dumps(result.vals, indent=2)
         #choose the max probability ditribution as model prediction
         maxvalue = max(result.vals)
         pos = result.vals.index(maxvalue)
@@ -102,7 +103,7 @@ for score in range(1,6):
         print(count)
         count = count + 1
     #print performances on the performances.csv file
-    with open("performancesMeta.csv", "a") as f:
+    with open("performances3.csv", "a") as f:
         f.write("ACCURACY of the "+str(score)+"th score: "+str(accuracy_score(target, pred))+'\n')
         f.write("PRECISION of the "+str(score)+"th score: "+str(precision_score(target, pred, average = 'macro'))+'\n')
         f.write("RECALL of the "+str(score)+"th score: "+str(recall_score(target, pred, average = 'macro'))+'\n')
