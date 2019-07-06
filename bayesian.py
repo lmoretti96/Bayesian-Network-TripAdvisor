@@ -13,10 +13,10 @@ def format_data(df):
     for row in df.itertuples():
         #print(row.Pclass)
         result.append(dict(
-          great = row.great, good = row.good, clean = row.clean,  comfortable = row.comfortable,
-          bad = row.bad, old = row.old,
+          # great = row.great, good = row.good, clean = row.clean,  comfortable = row.comfortable,
+          # bad = row.bad, old = row.old,
           Cleanliness= row.Cleanliness, Location=row.Location, Service=row.Service, Rooms=row.Rooms, 
-          Value=row.Value, Overall=row.Overall 
+          Value=row.Value, Overall=row.Overall ,Businessservice= row.Businessservice,Checkin=row.Checkin
         ))
 
             # beautiful = row.beautiful, wonderful = row.wonderful,     
@@ -33,7 +33,7 @@ node_data = format_data(df)
 
 skel = GraphSkeleton()
 #load structure of our net
-#skel.load("./skel-learned.txt")
+#skel.load("./meta-skel.txt")
 #setting the topologic order
 #skel.toporder()
 #learner which will estimate parameters e if needed net structure
@@ -48,12 +48,12 @@ learner = PGMLearner()
 net = learner.discrete_estimatebn(node_data)
 
 with open("reteTestMeta.csv", "a") as gv:
-  gv.write(json.dumps(net.V, indent=2))
-  gv.write(json.dumps(net.E, indent=2))  
+   gv.write(json.dumps(net.V, indent=2))
+   gv.write(json.dumps(net.E, indent=2))  
 res = learner.discrete_mle_estimateparams(net, node_data)
 with open("modelloMeta.csv", "a") as gv:
-  gv.write(json.dumps(res.E, indent=2))
-  gv.write(json.dumps(res.Vdata, indent=2))  
+   gv.write(json.dumps(res.E, indent=2))
+   gv.write(json.dumps(res.Vdata, indent=2))  
 
 #compute performances for each oveall score
 for score in range(1,6):
