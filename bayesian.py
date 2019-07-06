@@ -26,6 +26,10 @@ df = pd.read_csv('./features_filtrato.csv', sep=',')
 #format data to let them correctly processed by libpgm functions
 node_data = format_data(df)
 
+with open("outputBayesian1.txt", "a") as gv:
+      gv.write("ciao")
+    
+
 skel = GraphSkeleton()
 #load structure of our net
 skel.load("./skel-learned.txt")
@@ -36,7 +40,11 @@ learner = PGMLearner()
 
 #estismting parameters for our own model
 res = learner.discrete_mle_estimateparams(skel, node_data)
-print(str(res))
+print json.dumps(res.E, indent=2)
+print json.dumps(res.Vdata, indent=2)
+with open("outputBayesian1.txt", "a") as gv:
+      gv.write(json.dumps(res.E, indent=2))
+      gv.write(json.dumps(res.Vdata, indent=2))
 
 
 #estimating net structure given training data and paramenters this is an alternative to create a new model on our data
@@ -54,7 +62,7 @@ for score in range(1,6):
     target = []
     pred = []
     #load testing dataset into a dataframe
-    testdf = pd.read_csv("test-filtrato.csv",  sep = ",")
+    testdf = pd.read_csv("test_filtrato.csv",  sep = ",")
     #selecting row with a certain overall value
     testdf = testdf[testdf["Overall"] == score]
     print(len(testdf))
@@ -72,7 +80,7 @@ for score in range(1,6):
         Location = int(testdf.iloc[i]["Location"])
         Service = int(testdf.iloc[i]["Service"])
         Cleanliness = int(testdf.iloc[i]["Cleanliness"])
-        CheckIn = int(testdf.iloc[i]["CheckIn"])
+        Checkin = int(testdf.iloc[i]["Checkin"])
         Businessservice = int(testdf.iloc[i]["Businessservice"])
         Value = int(testdf.iloc[i]["Value"])
         Overall = int(testdf.iloc[i]["Overall"])
@@ -80,9 +88,10 @@ for score in range(1,6):
         target.append(Overall)
         #getting all cpt from our model
         a = TableCPDFactorization(res)
+        
         #compute the query and evidences as dicts
         query = dict(Overall=Overall)
-        evidence = dict(CheckIn=CheckIn,Businessservice=Businessservice,Service = Service, Location = Location, Cleanliness = Cleanliness, Value = Value, bad = bad, good = good, Rooms = Rooms, great =great, comfortable = comfortable, small = small, old = old)
+        evidence = dict(Checkin=Checkin,Businessservice=Businessservice,Service = Service, Location = Location, Cleanliness = Cleanliness, Value = Value, bad = bad, good = good, Rooms = Rooms, great =great, comfortable = comfortable, small = small, old = old)
         #run the query given evidence
         result = a.condprobve(query, evidence)
         #choose the max probability ditribution as model prediction
