@@ -1,4 +1,4 @@
-	{
+{
 	"V":
 	[
 	  "beautiful",
@@ -18,82 +18,83 @@
 	  "Overall",
 	  "Rooms"
 	],	
-	"E":[
-		  [
+	"E":
+	[
+		[
 			"good",
 			"Rooms"
-		  ],
-		  [
+		],
+		[
 			"Overall",
 			"Rooms"
-		  ],
-		  [
+		],
+		[
 			"beautiful",
 			"Rooms"
-		  ],
-		  [
+		],
+		[
 			"clean",
 			"Rooms"
-		  ],
-		  [
+		],
+		[
 			"great",
 			"Rooms"
-		  ],
-		  [
+		],
+		[
 			"Businessservice",
 			"Rooms"
-		  ],
-		  [
+		],
+		[
 			"Service",
 			"Rooms"
-		  ],
-		  [
+		],
+		[
 			"Location",
 			"Rooms"
-		  ],
-		  [
+		],
+		[
 			"comfortable",
 			"Rooms"
-		  ],
-		  [
+		],
+		[
 			"Cleanliness",
 			"Rooms"
-		  ],
-		  [
+		],
+		[
 			"wonderful",
 			"Rooms"
-		  ],
-		  [
+		],
+		[
 			"clean",
 			"Overall"
-		  ],
-		  [
+		],
+		[
 			"Checkin",
 			"Overall"
-		  ],
-		  [
+		],
+		[
 			"bad",
 			"Rooms"
-		  ],
-		  [
+		],
+		[
 			"Value",
 			"Rooms"
-		  ],
-		  [
+		],
+		[
 			"fantastic",
 			"Rooms"
-		  ],
-		  [
+		],
+		[
 			"Checkin",
 			"Rooms"
-		  ],
-		  [
+		],
+		[
 			"wonderful",
 			"Overall"
-		  ],
-		  [
+		],
+		[
 			"wonderful",
 			"Checkin"
-		  ]
 		]
+	]
 }

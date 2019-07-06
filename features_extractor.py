@@ -41,7 +41,10 @@ def extract_features(file):
 #main#
 
 #lista dei metadati che voglio estrarre
-metadatas = ["Overall", "Value", "Rooms", "Location", "Cleanliness", "Check in / front desk", "Service", "Business service"]
+metadatas = ["Overall", "Value", "Rooms", "Location", "Cleanliness", "Service"]
+
+# "Check in / front desk", 
+# "Business service"
 
 #apro il file delle parole più frequenti buone e cattive
 with open("keywords_prova.csv") as csv_file:
