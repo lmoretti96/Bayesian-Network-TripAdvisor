@@ -10,14 +10,14 @@ classe5 : 45588
 
 TEST
 
-CLASSE: NUMERO RIGHE    ---> azzeccati (modello indotto) -- azzeccati (modello nostro) -- azzeccati (modello indotto solo metadati)
+CLASSE: N. RIGHE    ---> modello indotto -- modello nostro --- modello indotto modificato
 
-classe1 : 1501  --> 756  (14%)   -- 4    (0,3%)  -- 
-classe2 : 2097  --> 0    (0%)    -- 1258 (60%)   -- 
-classe3 : 2770  --> 0    (0%)    -- 1662 (60%)   --
-classe4 : 7370  --> 4053 (55%)   -- 1916 (26%)   -- 
-classe5 : 7853  --> 31   (0,4%)  -- 0    (0%)    -- 
+classe1 : 1501  --> 210  (14%)   -- 4    (0,3%)  -- 360 (24%)
+classe2 : 2097  --> 0    (0%)    -- 1258 (60%)   -- 629 (30%)
+classe3 : 2770  --> 0    (0%)    -- 1662 (60%)   -- 443 (16%)
+classe4 : 7370  --> 4053 (55%)   -- 1916 (26%)   -- 3832 (52%)
+classe5 : 7853  --> 31   (0,4%)  -- 0    (0%)    -- 0(0%) 
 
-tot:    : 18.821‬--> 4840 (26%)   -- 2924 (16%)   --
+tot:    : 18.821‬--> 4294 (23%)   -- 2924 (16%)   -- 5264 (28%)
 
 
