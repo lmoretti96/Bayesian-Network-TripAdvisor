@@ -7,6 +7,7 @@ from libpgm.graphskeleton import GraphSkeleton
 from libpgm.pgmlearner import PGMLearner
 from libpgm.tablecpdfactorization import TableCPDFactorization
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
+from libpgm.discretebayesiannetwork import DiscreteBayesianNetwork
 #Defining formatting data method
 def format_data(df):
     result = []
@@ -40,11 +41,10 @@ skel.toporder()
 #learner which will estimate parameters e if needed net structure
 learner = PGMLearner()
 
+
 #estismting parameters for our own model
 res = learner.discrete_mle_estimateparams(skel, node_data)
-with open("modelloNuovo.csv", "a") as gv:
-  gv.write(json.dumps(res.E, indent=2))
-  gv.write(json.dumps(res.Vdata, indent=2))  
+
 
 """
 #estimating net structure given training data and paramenters this is an alternative to create a new model on our data

@@ -1,4 +1,78 @@
 {
+  
+    "V":[
+    "great", 
+    "good", 
+    "old", 
+    "Service", 
+    "Cleanliness", 
+    "comfortable", 
+    "bad", 
+    "clean", 
+    "Location", 
+    "Value", 
+    "Rooms", 
+    "Overall"
+  ],"E":[
+    [
+      "great", 
+      "good"
+    ], 
+    [
+      "great", 
+      "Rooms"
+    ], 
+    [
+      "good", 
+      "Rooms"
+    ], 
+    [
+      "Value", 
+      "Rooms"
+    ], 
+    [
+      "comfortable", 
+      "clean"
+    ], 
+    [
+      "Service", 
+      "Rooms"
+    ], 
+    [
+      "Location", 
+      "Value"
+    ], 
+    [
+      "clean", 
+      "Value"
+    ], 
+    [
+      "Cleanliness", 
+      "Rooms"
+    ], 
+    [
+      "Location", 
+      "Overall"
+    ], 
+    [
+      "old", 
+      "Rooms"
+    ], 
+      [
+      "Rooms", 
+      "Overall"
+    ],
+    [
+      "bad", 
+      "Rooms"
+    ]
+  ],
+  "Vdata":{
+  
+  
+  
+
+
   "great": {
     "vals": [
       1, 
@@ -14475,4 +14549,5 @@
       "Overall"
     ]
   }
+}
 }

@@ -5,7 +5,6 @@ import json
 from libpgm.nodedata import NodeData
 from libpgm.graphskeleton import GraphSkeleton
 from libpgm.pgmlearner import PGMLearner
-from libpgm.discretebayesiannetwork import DiscreteBayesianNetwork
 from libpgm.tablecpdfactorization import TableCPDFactorization
 
 #Defining formatting data method
@@ -20,15 +19,14 @@ def format_data(df):
           Value=row.Value, Overall=row.Overall 
         ))
 
+
     return result
 #load all preprocessed training data
 df = pd.read_csv('features.csv', sep=',')
 
 #format data to let them correctly processed by libpgm functions
-#node_data = format_data(df)
-nd = NodeData()
-skel = GraphSkeleton()
-nd.load("./ModelliCPT/model.txt")
+node_data = format_data(df)
+
 skel = GraphSkeleton()
 #load structure of our net
 skel.load("./skel-learned2.txt")
@@ -38,10 +36,10 @@ skel.toporder()
 learner = PGMLearner()
 
 #estismting parameters for our own model
-bn = DiscreteBayesianNetwork(skel, nd)
+res = learner.discrete_mle_estimateparams(skel, node_data)
 
 # get CPT
-a = TableCPDFactorization(bn)
+a = TableCPDFactorization(res)
 #compute the query and evidences as dicts
 query = dict(Overall=Overall)
 # prepare dictionary of values (dopo gli uguali devi mettere i valori che leggi dalla GUI)
