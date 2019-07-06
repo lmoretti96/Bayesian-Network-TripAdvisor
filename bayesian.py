@@ -27,27 +27,24 @@ def format_data(df):
        #    Checkin=row.Checkin, Service=row.Service, Rooms=row.Rooms, Value=row.Value, Overall=row.Overall ))
     return result
 #load all preprocessed training data
-<<<<<<< HEAD
-df = pd.read_csv('./features_filtrato.csv', sep=',')
-=======
-df = pd.read_csv('./feature_meta.csv', sep=',')
->>>>>>> 204360624fa290114bd519e9e60fbf288126af3d
+df = pd.read_csv('features.csv', sep=',')
+
 #format data to let them correctly processed by libpgm functions
 node_data = format_data(df)
 
 skel = GraphSkeleton()
 #load structure of our net
-#skel.load("./skel-learned.txt")
+skel.load("./skel-learned.txt")
 #setting the topologic order
-#skel.toporder()
+skel.toporder()
 #learner which will estimate parameters e if needed net structure
 learner = PGMLearner()
 
 #estismting parameters for our own model
-#res = learner.discrete_mle_estimateparams(skel, node_data)
+res = learner.discrete_mle_estimateparams(skel, node_data)
 
 
-
+"""
 #estimating net structure given training data and paramenters this is an alternative to create a new model on our data
 net = learner.discrete_estimatebn(node_data)
 
@@ -58,7 +55,7 @@ res = learner.discrete_mle_estimateparams(net, node_data)
 with open("modelloMeta.csv", "a") as gv:
   gv.write(json.dumps(res.E, indent=2))
   gv.write(json.dumps(res.Vdata, indent=2))  
-
+"""
 #compute performances for each oveall score
 for score in range(1,6):
     target = []
@@ -72,19 +69,19 @@ for score in range(1,6):
     #for every test record
     for i in range (0, len(testdf)):
         #extract features
-        # great = int(testdf.iloc[i]["great"])
-        # good = int(testdf.iloc[i]["good"])
-        # comfortable = int(testdf.iloc[i]["comfortable"])
-        # clean = int(testdf.iloc[i]["clean"])
+        great = int(testdf.iloc[i]["great"])
+        good = int(testdf.iloc[i]["good"])
+        comfortable = int(testdf.iloc[i]["comfortable"])
+        clean = int(testdf.iloc[i]["clean"])
         # # small = int(testdf.iloc[i]["small"])
-        # bad = int(testdf.iloc[i]["bad"])
-        # old = int(testdf.iloc[i]["old"])
+        bad = int(testdf.iloc[i]["bad"])
+        old = int(testdf.iloc[i]["old"])
         Rooms = int(testdf.iloc[i]["Rooms"])
         Location = int(testdf.iloc[i]["Location"])
         Service = int(testdf.iloc[i]["Service"])
         Cleanliness = int(testdf.iloc[i]["Cleanliness"])
-        Checkin = int(testdf.iloc[i]["Checkin"])
-        Businessservice = int(testdf.iloc[i]["Businessservice"])
+        #Checkin = int(testdf.iloc[i]["Checkin"])
+        #Businessservice = int(testdf.iloc[i]["Businessservice"])
         Value = int(testdf.iloc[i]["Value"])
         Overall = int(testdf.iloc[i]["Overall"])
         #append the overall score to the target list
@@ -93,7 +90,8 @@ for score in range(1,6):
         a = TableCPDFactorization(res)
         #compute the query and evidences as dicts
         query = dict(Overall=Overall)
-        evidence = dict(Service = Service, Location = Location, Cleanliness = Cleanliness, Value = Value,Checkin=Checkin,Businessservice=Businessservice )
+        evidence = dict(Service = Service, Location = Location, Cleanliness = Cleanliness, Value = Value)
+        #Checkin=Checkin,Businessservice=Businessservice 
         #run the query given evidence
         result = a.condprobve(query, evidence)
         #choose the max probability ditribution as model prediction

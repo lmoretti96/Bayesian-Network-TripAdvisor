@@ -6,7 +6,7 @@ import json
 import os
 
 def extract_features(file):
-    with open('test.csv', 'a') as output_file:
+    with open('test.csv', 'a', newline='') as output_file:
         #apro il file delle recensioni di un hotel
         with open('Dataset/Testing/' + file, errors='ignore') as dat_file:
                 data = dat_file.read()
@@ -29,20 +29,25 @@ def extract_features(file):
                 if(str(current_features[metadata])=="-1"):
                     valido=False
 
+            #cerco se le keyword sono presenti nel content
+            for keyword in feature_words:
+                if re.search(keyword, content, re.IGNORECASE):
+                    current_features[keyword] = 1
+                else:
+                    current_features[keyword] = 0
 
             #scrivo i valori per ogni recensione
             if(valido==True):
                 writer = csv.writer(output_file)
                 writer.writerow(current_features.values())
-
+        
 #---------------------------------------------------------------------------------------------#
 #main#
 
 #lista dei metadati che voglio estrarre
-metadatas = ["Overall", "Value", "Rooms", "Location", "Cleanliness", "Service","Business service","Check in / front desk"]
+metadatas = ["Overall", "Value", "Rooms", "Location", "Cleanliness", "Service"]
+#,"Business service","Check in / front desk"]
 
-# "Business service"
-# "Check in / front desk"
 
 #apro il file delle parole più frequenti buone e cattive
 with open("keywords_prova.csv") as csv_file:
@@ -52,9 +57,10 @@ with open("keywords_prova.csv") as csv_file:
 feature_words = good_keyworks + bad_keyworks
 
 #creo il file di output e stampo l'header
-with open("test.csv" , 'w') as output_file:
+with open('test.csv', 'w', newline='') as output_file:
     writer = csv.writer(output_file)
     writer.writerow(feature_words + metadatas)
+    #writer.writerow(metadatas)
 
 #apro ad uno ad uno i file della cartella training
 for file in os.listdir('Dataset/Testing/'):
