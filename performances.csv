@@ -1,3 +1,21 @@
+<<<<<<< HEAD
+ACCURACY of the 1th score: 0.001998667554963358
+PRECISION of the 1th score: 0.2
+RECALL of the 1th score: 0.00039973351099267156
+F-MEASURE of the 1th score: 0.000797872340425532
+ACCURACY of the 2th score: 0.619933237958989
+PRECISION of the 2th score: 0.2
+RECALL of the 2th score: 0.12398664759179781
+F-MEASURE of the 2th score: 0.15307624374448042
+ACCURACY of the 3th score: 0.23429602888086642
+PRECISION of the 3th score: 0.2
+RECALL of the 3th score: 0.046859205776173286
+F-MEASURE of the 3th score: 0.07592863410353905
+ACCURACY of the 4th score: 0.08765264586160108
+PRECISION of the 4th score: 0.2
+RECALL of the 4th score: 0.017530529172320217
+F-MEASURE of the 4th score: 0.03223552894211577
+=======
 ACCURACY of the 1th score: 0.13657561625582945
 PRECISION of the 1th score: 0.25
 RECALL of the 1th score: 0.03414390406395736
@@ -14,6 +32,7 @@ ACCURACY of the 4th score: 0.0
 PRECISION of the 4th score: 0.0
 RECALL of the 4th score: 0.0
 F-MEASURE of the 4th score: 0.0
+>>>>>>> 204360624fa290114bd519e9e60fbf288126af3d
 ACCURACY of the 5th score: 0.0
 PRECISION of the 5th score: 0.0
 RECALL of the 5th score: 0.0
