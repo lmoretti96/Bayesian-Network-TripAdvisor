@@ -1,0 +1,23 @@
+TRAIN
+    
+CLASSE: NUMERO RIGHE    
+
+classe1 : 4651
+classe2 : 7070
+classe3 : 9326
+classe4 : 28277
+classe5 : 45588
+
+TEST
+
+CLASSE: NUMERO RIGHE    ---> azzeccati
+
+classe1 : 1501  --> 756
+classe2 : 2097  --> 0
+classe3 : 2770  --> 0
+classe4 : 7370  --> 4053
+classe5 : 7853  --> 414 
+
+tot:    : 18.821‬ --> 5223 : 28%
+
+

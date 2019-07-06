@@ -41,7 +41,7 @@ def extract_features(file):
 #main#
 
 #lista dei metadati che voglio estrarre
-metadatas = ["Overall", "Value", "Rooms", "Location", "Cleanliness", "Service"]
+metadatas = ["Overall", "Value", "Rooms", "Location", "Cleanliness", "Service","Business service"]
 
 # "Check in / front desk", 
 # "Business service"

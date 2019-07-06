@@ -33,7 +33,7 @@ node_data = format_data(df)
 
 skel = GraphSkeleton()
 #load structure of our net
-skel.load("./our-skel.txt")
+skel.load("./skel-learned.txt")
 #setting the topologic order
 skel.toporder()
 #learner which will estimate parameters e if needed net structure
@@ -41,9 +41,10 @@ learner = PGMLearner()
 
 #estismting parameters for our own model
 res = learner.discrete_mle_estimateparams(skel, node_data)
-print(json.dumps(res.E, indent=2))
-print(json.dumps(res.Vdata, indent=2))
 
+with open("rete.csv", "a") as gv:
+  gv.write(json.dumps(res.E, indent=2))
+  gv.write(json.dumps(res.Vdata, indent=2))  
 
 #estimating net structure given training data and paramenters this is an alternative to create a new model on our data
 #net = learner.discrete_estimatebn(node_data)
