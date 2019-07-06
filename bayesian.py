@@ -27,7 +27,11 @@ def format_data(df):
        #    Checkin=row.Checkin, Service=row.Service, Rooms=row.Rooms, Value=row.Value, Overall=row.Overall ))
     return result
 #load all preprocessed training data
+<<<<<<< HEAD
+df = pd.read_csv('./features_filtrato.csv', sep=',')
+=======
 df = pd.read_csv('./feature_meta.csv', sep=',')
+>>>>>>> 204360624fa290114bd519e9e60fbf288126af3d
 #format data to let them correctly processed by libpgm functions
 node_data = format_data(df)
 
