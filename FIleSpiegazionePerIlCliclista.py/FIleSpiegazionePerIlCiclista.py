@@ -5,8 +5,9 @@ import json
 from libpgm.nodedata import NodeData
 from libpgm.graphskeleton import GraphSkeleton
 from libpgm.pgmlearner import PGMLearner
+from libpgm.discretebayesiannetwork import DiscreteBayesianNetwork
 from libpgm.tablecpdfactorization import TableCPDFactorization
-from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
+
 #Defining formatting data method
 def format_data(df):
     result = []
@@ -19,19 +20,15 @@ def format_data(df):
           Value=row.Value, Overall=row.Overall 
         ))
 
-            # beautiful = row.beautiful, wonderful = row.wonderful,     
-            # Checkin=row.Checkin, Businessservice=row.Businessservice,
-             #      result.append(dict(great = row.great, good = row.good, nice = row.nice, clean = row.clean, helpful = row.helpful, comfortable = row.comfortable,
-       # beautiful = row.beautiful, wonderful = row.wonderful, friendly = row.friendly, fantastic = row.fantastic, bad = row.bad, 
-      #   Cleanliness= row.Cleanliness, Location=row.Location ,Businessservice=row.Businessservice,
-       #    Checkin=row.Checkin, Service=row.Service, Rooms=row.Rooms, Value=row.Value, Overall=row.Overall ))
     return result
 #load all preprocessed training data
 df = pd.read_csv('features.csv', sep=',')
 
 #format data to let them correctly processed by libpgm functions
-node_data = format_data(df)
-
+#node_data = format_data(df)
+nd = NodeData()
+skel = GraphSkeleton()
+nd.load("./ModelliCPT/model.txt")
 skel = GraphSkeleton()
 #load structure of our net
 skel.load("./skel-learned2.txt")
@@ -41,10 +38,10 @@ skel.toporder()
 learner = PGMLearner()
 
 #estismting parameters for our own model
-res = learner.discrete_mle_estimateparams(skel, node_data)
+bn = DiscreteBayesianNetwork(skel, nd)
 
 # get CPT
-a = TableCPDFactorization(res)
+a = TableCPDFactorization(bn)
 #compute the query and evidences as dicts
 query = dict(Overall=Overall)
 # prepare dictionary of values (dopo gli uguali devi mettere i valori che leggi dalla GUI)
