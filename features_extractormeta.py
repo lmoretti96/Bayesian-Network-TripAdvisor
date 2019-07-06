@@ -6,9 +6,9 @@ import json
 import os
 
 def extract_features(file):
-    with open('test.csv', 'a') as output_file:
+    with open('feature_meta.csv', 'a') as output_file:
         #apro il file delle recensioni di un hotel
-        with open('Dataset/Testing/' + file, errors='ignore') as dat_file:
+        with open('Dataset/Training/' + file, errors='ignore') as dat_file:
                 data = dat_file.read()
 
         #divido il file delle recensioni per ogni recensione eliminando il preambolo generale sull'hotel
@@ -52,11 +52,11 @@ with open("keywords_prova.csv") as csv_file:
 feature_words = good_keyworks + bad_keyworks
 
 #creo il file di output e stampo l'header
-with open("test.csv" , 'w') as output_file:
+with open("feature_meta.csv" , 'w') as output_file:
     writer = csv.writer(output_file)
     writer.writerow(feature_words + metadatas)
 
 #apro ad uno ad uno i file della cartella training
-for file in os.listdir('Dataset/Testing/'):
+for file in os.listdir('Dataset/Training/'):
     print(file)
     extract_features(file)

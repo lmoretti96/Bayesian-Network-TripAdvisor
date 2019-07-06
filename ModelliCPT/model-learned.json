@@ -1,70 +1,4 @@
-a[
-  "great", 
-  "good", 
-  "old", 
-  "Service", 
-  "Cleanliness", 
-  "comfortable", 
-  "bad", 
-  "clean", 
-  "Location", 
-  "Value", 
-  "Rooms", 
-  "Overall"
-][
-  [
-    "great", 
-    "good"
-  ], 
-  [
-    "great", 
-    "Rooms"
-  ], 
-  [
-    "good", 
-    "Rooms"
-  ], 
-  [
-    "Value", 
-    "Rooms"
-  ], 
-  [
-    "bad", 
-    "clean"
-  ], 
-  [
-    "comfortable", 
-    "clean"
-  ], 
-  [
-    "Service", 
-    "Rooms"
-  ], 
-  [
-    "Location", 
-    "Value"
-  ], 
-  [
-    "clean", 
-    "Value"
-  ], 
-  [
-    "Cleanliness", 
-    "Rooms"
-  ], 
-  [
-    "Location", 
-    "Overall"
-  ], 
-  [
-    "old", 
-    "Rooms"
-  ], 
-  [
-    "bad", 
-    "Rooms"
-  ]
-]{
+{
   "great": {
     "vals": [
       0, 
@@ -14408,4 +14342,4 @@ a[
     ], 
     "children": []
   }
-}a
+}

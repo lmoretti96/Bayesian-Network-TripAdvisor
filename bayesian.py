@@ -27,7 +27,7 @@ def format_data(df):
        #    Checkin=row.Checkin, Service=row.Service, Rooms=row.Rooms, Value=row.Value, Overall=row.Overall ))
     return result
 #load all preprocessed training data
-df = pd.read_csv('./features_filtrato.csv', sep=',')
+df = pd.read_csv('./feature_meta.csv', sep=',')
 #format data to let them correctly processed by libpgm functions
 node_data = format_data(df)
 
@@ -47,11 +47,11 @@ learner = PGMLearner()
 #estimating net structure given training data and paramenters this is an alternative to create a new model on our data
 net = learner.discrete_estimatebn(node_data)
 
-with open("reteTest.csv", "a") as gv:
+with open("reteTestMeta.csv", "a") as gv:
   gv.write(json.dumps(net.V, indent=2))
   gv.write(json.dumps(net.E, indent=2))  
 res = learner.discrete_mle_estimateparams(net, node_data)
-with open("modello.csv", "a") as gv:
+with open("modelloMeta.csv", "a") as gv:
   gv.write(json.dumps(res.E, indent=2))
   gv.write(json.dumps(res.Vdata, indent=2))  
 
@@ -60,7 +60,7 @@ for score in range(1,6):
     target = []
     pred = []
     #load testing dataset into a dataframe
-    testdf = pd.read_csv("test_filtrato.csv",  sep = ",")
+    testdf = pd.read_csv("test.csv",  sep = ",")
     #selecting row with a certain overall value
     testdf = testdf[testdf["Overall"] == score]
     print(len(testdf))
@@ -68,19 +68,19 @@ for score in range(1,6):
     #for every test record
     for i in range (0, len(testdf)):
         #extract features
-        great = int(testdf.iloc[i]["great"])
-        good = int(testdf.iloc[i]["good"])
-        comfortable = int(testdf.iloc[i]["comfortable"])
-        clean = int(testdf.iloc[i]["clean"])
-        # small = int(testdf.iloc[i]["small"])
-        bad = int(testdf.iloc[i]["bad"])
-        old = int(testdf.iloc[i]["old"])
+        # great = int(testdf.iloc[i]["great"])
+        # good = int(testdf.iloc[i]["good"])
+        # comfortable = int(testdf.iloc[i]["comfortable"])
+        # clean = int(testdf.iloc[i]["clean"])
+        # # small = int(testdf.iloc[i]["small"])
+        # bad = int(testdf.iloc[i]["bad"])
+        # old = int(testdf.iloc[i]["old"])
         Rooms = int(testdf.iloc[i]["Rooms"])
         Location = int(testdf.iloc[i]["Location"])
         Service = int(testdf.iloc[i]["Service"])
         Cleanliness = int(testdf.iloc[i]["Cleanliness"])
-        #CheckIn = int(testdf.iloc[i]["CheckIn"])
-        #Businessservice = int(testdf.iloc[i]["Businessservice"])
+        Checkin = int(testdf.iloc[i]["Checkin"])
+        Businessservice = int(testdf.iloc[i]["Businessservice"])
         Value = int(testdf.iloc[i]["Value"])
         Overall = int(testdf.iloc[i]["Overall"])
         #append the overall score to the target list
@@ -89,7 +89,7 @@ for score in range(1,6):
         a = TableCPDFactorization(res)
         #compute the query and evidences as dicts
         query = dict(Overall=Overall)
-        evidence = dict(Service = Service, Location = Location, Cleanliness = Cleanliness, Value = Value, bad = bad, good = good, Rooms = Rooms, great =great, comfortable = comfortable, old = old)
+        evidence = dict(Service = Service, Location = Location, Cleanliness = Cleanliness, Value = Value,Checkin=Checkin,Businessservice=Businessservice )
         #run the query given evidence
         result = a.condprobve(query, evidence)
         #choose the max probability ditribution as model prediction
@@ -100,7 +100,7 @@ for score in range(1,6):
         print(count)
         count = count + 1
     #print performances on the performances.csv file
-    with open("performances.csv", "a") as f:
+    with open("performancesMeta.csv", "a") as f:
         f.write("ACCURACY of the "+str(score)+"th score: "+str(accuracy_score(target, pred))+'\n')
         f.write("PRECISION of the "+str(score)+"th score: "+str(precision_score(target, pred, average = 'macro'))+'\n')
         f.write("RECALL of the "+str(score)+"th score: "+str(recall_score(target, pred, average = 'macro'))+'\n')
