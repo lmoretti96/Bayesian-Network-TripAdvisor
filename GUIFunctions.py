@@ -69,7 +69,12 @@ def fun(inputData):
     #run the query given evidence
     result = a.condprobve(query, evidence)
 
-    # now you have all things you need. result.vals at index 0 rappresents the class 1, result.vals at index 1 rappresents the class 2 etc 
     print json.dumps(result.vals, indent=2)
-
-    return result
+    #res.Vdata["Overall"]["vals"][pos]
+    #arr=[]
+    dizionario={}
+    for i in range(1,6):
+        dizionario[res.Vdata["Overall"]["vals"][i-1]] = result.vals[i-1]
+    #    arr.append(dizionario)
+    #print(str(arr))
+    return dizionario
