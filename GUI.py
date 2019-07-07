@@ -96,10 +96,11 @@ class Example(QtGui.QWidget):
                 data.append(1)
             else:
                 data.append(0)
-        print(data)
-        fun(data)
+        result = fun(data)
+        result = (max(result.vals))
         print("eseguita funzione")
-        self.result.setText("Risultato ")
+        strResult = "Performance: " + str(result)
+        self.result.setText(strResult)
     
     
 

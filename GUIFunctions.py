@@ -54,7 +54,7 @@ def fun(inputData):
                     Location = inputData[2],
                     Cleanliness = inputData[3],
                     Service = inputData[4],
-                    Roooms = inputData[5],
+                    Rooms = inputData[5],
                     bad = inputData[6],
                     old = inputData[7],
                     good = inputData[8],
@@ -62,9 +62,8 @@ def fun(inputData):
                     comfortable = inputData[10],
                     clean = inputData[11]
                     )
-    
-    print(query)
 
+    print(query)
     print(evidence)
 
     #run the query given evidence
