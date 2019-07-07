@@ -3,7 +3,8 @@
 import sys
 from PyQt4 import QtGui
 from PyQt4.QtCore import pyqtSlot
-
+from GUIFunctions import fun
+import re
 
 class Example(QtGui.QWidget):
     
@@ -25,6 +26,7 @@ class Example(QtGui.QWidget):
 
         #Bottoni
         self.button = QtGui.QPushButton("Esegui")
+        self.button.setEnabled(False)
 
         #EditLines
         self.overallEdit = QtGui.QLineEdit()
@@ -34,7 +36,7 @@ class Example(QtGui.QWidget):
         self.cleanlinessEdit = QtGui.QLineEdit()
         self.serviceEdit = QtGui.QLineEdit()
         self.reviewEdit = QtGui.QTextEdit()
-        self.edits = [self.overallEdit, self.valueEdit, self.roomsEdit, self.locationEdit, self.cleanlinessEdit, self.serviceEdit, self.reviewEdit]
+        self.edits = [self.overallEdit, self.valueEdit, self.locationEdit, self.cleanlinessEdit, self.serviceEdit, self.roomsEdit]
 
         #Pozionamento elementi nella griglia
         grid = QtGui.QGridLayout()
@@ -59,28 +61,54 @@ class Example(QtGui.QWidget):
 
         #Azioni triggerate
         self.button.clicked.connect(self.buttonClicked)   
+        
         self.overallEdit.editingFinished.connect(self.editingFinished)
         self.valueEdit.editingFinished.connect(self.editingFinished)
         self.locationEdit.editingFinished.connect(self.editingFinished)
         self.cleanlinessEdit.editingFinished.connect(self.editingFinished)
         self.serviceEdit.editingFinished.connect(self.editingFinished)
         self.roomsEdit.editingFinished.connect(self.editingFinished)
+        
 
         #info sulla finestra
         self.setLayout(grid) 
         self.setGeometry(500, 500, 350, 300)
-        self.setWindowTitle('Review')    
+        self.setWindowTitle('Review Demo')    
         self.show()
         
+
     def buttonClicked(self):
         sender = self.sender()
+        overall = self.overall.text()
+        value = self.value.text()
+        location = self.location.text()
+        cleanliness = self.cleanliness.text()
+        service = self.service.text()
+        rooms = self.rooms.text()
+        data = []
+        for edit in self.edits:
+            data.append(int(edit.text()))
+
+        text = self.reviewEdit.toPlainText()
+        keywords = ["bad", "old,", "good", "great", "comfortable", "clean"]
+        for keyword in keywords:
+            if re.search(keyword, text, re.IGNORECASE):
+                data.append(1)
+            else:
+                data.append(0)
+        print(data)
+        fun(data)
         print("eseguita funzione")
         self.result.setText("Risultato ")
     
+    
+
+
     def editingFinished(self):
         sender = self.sender()
-        edits = self.edits
-        for edit in edits:
+        allGood = [False,False,False,False,False,False]
+        i = 0
+        for edit in self.edits:
             value = edit.text()
             text = False
             if(value != ""):
@@ -90,10 +118,16 @@ class Example(QtGui.QWidget):
                     text = True
                 if (text) or (value <= 0) or (value>5) and not (value == None) :
                     edit.setText("inserire valore compreso tra 1 e 5")
-
+                else:
+                    allGood[i] = True
+            i += 1
+        for el in allGood:
+            if el == False:
+                self.button.setEnabled(False)
+                return
+        self.button.setEnabled(True)
 
 def main():
-    
     app = QtGui.QApplication(sys.argv)
     ex = Example()
     sys.exit(app.exec_())
