@@ -15,7 +15,7 @@ class Example(QtGui.QWidget):
     def initUI(self):
         
         #Labels
-        self.overall = QtGui.QLabel('Overall')
+        #self.overall = QtGui.QLabel('Overall')
         self.value = QtGui.QLabel('Value')
         self.rooms = QtGui.QLabel('Rooms')
         self.location = QtGui.QLabel('Location')
@@ -29,20 +29,20 @@ class Example(QtGui.QWidget):
         self.button.setEnabled(False)
 
         #EditLines
-        self.overallEdit = QtGui.QLineEdit()
+        #self.overallEdit = QtGui.QLineEdit()
         self.valueEdit = QtGui.QLineEdit()
         self.roomsEdit = QtGui.QLineEdit()
         self.locationEdit = QtGui.QLineEdit()
         self.cleanlinessEdit = QtGui.QLineEdit()
         self.serviceEdit = QtGui.QLineEdit()
         self.reviewEdit = QtGui.QTextEdit()
-        self.edits = [self.overallEdit, self.valueEdit, self.locationEdit, self.cleanlinessEdit, self.serviceEdit, self.roomsEdit]
+        self.edits = [self.valueEdit, self.locationEdit, self.cleanlinessEdit, self.serviceEdit, self.roomsEdit]
 
         #Pozionamento elementi nella griglia
         grid = QtGui.QGridLayout()
         grid.setSpacing(10)
-        grid.addWidget(self.overall, 1, 0)
-        grid.addWidget(self.overallEdit, 1, 1)
+        #grid.addWidget(self.overall, 1, 0)
+        #grid.addWidget(self.overallEdit, 1, 1)
         grid.addWidget(self.value, 2, 0)
         grid.addWidget(self.valueEdit, 2, 1)
         grid.addWidget(self.location, 3, 0)
@@ -60,7 +60,7 @@ class Example(QtGui.QWidget):
 
         #Azioni triggerate
         self.button.clicked.connect(self.buttonClicked)
-        self.overallEdit.editingFinished.connect(self.editingFinished)
+        #self.overallEdit.editingFinished.connect(self.editingFinished)
         self.valueEdit.editingFinished.connect(self.editingFinished)
         self.locationEdit.editingFinished.connect(self.editingFinished)
         self.cleanlinessEdit.editingFinished.connect(self.editingFinished)
@@ -77,7 +77,7 @@ class Example(QtGui.QWidget):
 
     def buttonClicked(self):
         sender = self.sender()
-        overall = self.overall.text()
+        #overall = self.overall.text()
         value = self.value.text()
         location = self.location.text()
         cleanliness = self.cleanliness.text()
@@ -94,15 +94,16 @@ class Example(QtGui.QWidget):
                 data.append(1)
             else:
                 data.append(0)
-        result = fun(data).vals
-        strResult = "classe 1:\t" + str(result[0]) + "\n"+"classe 2: \t" + str(result[1]) + "\n" +"classe 3:\t" + str(result[2]) + "\n" + "classe 4:\t" + str(result[3]) + "\n" + "classe 5:\t" + str(result[4])
+        result = fun(data)
+        print(result)
+        strResult = "classe 1:\t" + str(round(float(result[1L]), 3)) + "\n" + "classe 2:\t" + str(round(float(result[2L]), 3)) + "\n" + "classe 3:\t" + str(round(float(result[3L]), 3)) + "\n" + "classe 4:\t" + str(round(float(result[4L]), 3)) + "\n" + "classe 5:\t" + str(round(float(result[5L]), 3))
         print("eseguita funzione")
         self.result.setText(strResult)
 
 
     def editingFinished(self):
         sender = self.sender()
-        allGood = [False,False,False,False,False,False]
+        allGood = [False,False,False,False,False]
         i = 0
         for edit in self.edits:
             value = edit.text()
