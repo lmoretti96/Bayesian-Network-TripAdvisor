@@ -95,8 +95,7 @@ class Example(QtGui.QWidget):
             else:
                 data.append(0)
         result = fun(data)
-        print(result)
-        strResult = "classe 1:\t" + str(round(float(result[1L]), 3)) + "\n" + "classe 2:\t" + str(round(float(result[2L]), 3)) + "\n" + "classe 3:\t" + str(round(float(result[3L]), 3)) + "\n" + "classe 4:\t" + str(round(float(result[4L]), 3)) + "\n" + "classe 5:\t" + str(round(float(result[5L]), 3))
+        strResult = "classe 1:\t" + str(round(float(result[1L])*100, 2))+" % " + "\n" + "classe 2:\t" + str(round(float(result[2L]*100), 2))+" %" + "\n" + "classe 3:\t" + str(round(float(result[3L]*100), 2))+" %" + "\n" + "classe 4:\t" + str(round(float(result[4L]*100), 2))+" %" + "\n" + "classe 5:\t" + str(round(float(result[5L]*100), 2))+" %"
         print("eseguita funzione")
         self.result.setText(strResult)
 
