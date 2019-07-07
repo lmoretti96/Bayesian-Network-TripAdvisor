@@ -41,7 +41,6 @@ class Example(QtGui.QWidget):
         #Pozionamento elementi nella griglia
         grid = QtGui.QGridLayout()
         grid.setSpacing(10)
-
         grid.addWidget(self.overall, 1, 0)
         grid.addWidget(self.overallEdit, 1, 1)
         grid.addWidget(self.value, 2, 0)
@@ -60,8 +59,7 @@ class Example(QtGui.QWidget):
         grid.addWidget(self.result, 9,1)
 
         #Azioni triggerate
-        self.button.clicked.connect(self.buttonClicked)   
-        
+        self.button.clicked.connect(self.buttonClicked)
         self.overallEdit.editingFinished.connect(self.editingFinished)
         self.valueEdit.editingFinished.connect(self.editingFinished)
         self.locationEdit.editingFinished.connect(self.editingFinished)
@@ -96,13 +94,10 @@ class Example(QtGui.QWidget):
                 data.append(1)
             else:
                 data.append(0)
-        result = fun(data)
-        result = (max(result.vals))
+        result = fun(data).vals
+        strResult = "classe 1:\t" + str(result[0]) + "\n"+"classe 2: \t" + str(result[1]) + "\n" +"classe 3:\t" + str(result[2]) + "\n" + "classe 4:\t" + str(result[3]) + "\n" + "classe 5:\t" + str(result[4])
         print("eseguita funzione")
-        strResult = "Performance: " + str(result)
         self.result.setText(strResult)
-    
-    
 
 
     def editingFinished(self):
