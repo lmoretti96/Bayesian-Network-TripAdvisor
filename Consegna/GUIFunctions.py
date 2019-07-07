@@ -47,20 +47,20 @@ def fun(inputData):
     # get CPT
     a = TableCPDFactorization(res)
     #compute the query and evidences as dicts
-    query = dict(Overall=inputData[0])
+    query = dict(Overall=1)
     # prepare dictionary of values (dopo gli uguali devi mettere i valori che leggi dalla GUI)
     
-    evidence = dict(Value = inputData[1],
-                    Location = inputData[2],
-                    Cleanliness = inputData[3],
-                    Service = inputData[4],
-                    Rooms = inputData[5],
-                    bad = inputData[6],
-                    old = inputData[7],
-                    good = inputData[8],
-                    great = inputData[9],
-                    comfortable = inputData[10],
-                    clean = inputData[11]
+    evidence = dict(Value = inputData[0],
+                    Location = inputData[1],
+                    Cleanliness = inputData[2],
+                    Service = inputData[3],
+                    Rooms = inputData[4],
+                    bad = inputData[5],
+                    old = inputData[6],
+                    good = inputData[7],
+                    great = inputData[8],
+                    comfortable = inputData[9],
+                    clean = inputData[10]
                     )
 
     print(query)
@@ -69,7 +69,12 @@ def fun(inputData):
     #run the query given evidence
     result = a.condprobve(query, evidence)
 
-    # now you have all things you need. result.vals at index 0 rappresents the class 1, result.vals at index 1 rappresents the class 2 etc 
     print json.dumps(result.vals, indent=2)
-
-    return result
+    #res.Vdata["Overall"]["vals"][pos]
+    #arr=[]
+    dizionario={}
+    for i in range(1,6):
+        dizionario[res.Vdata["Overall"]["vals"][i-1]] = result.vals[i-1]
+    #    arr.append(dizionario)
+    #print(str(arr))
+    return dizionario
