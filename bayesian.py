@@ -10,14 +10,6 @@ from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_sc
 from libpgm.discretebayesiannetwork import DiscreteBayesianNetwork
 
 
-def GetRealValueLast(val):
-    return {
-      0:2, 
-      1:4, 
-      2:3, 
-      3:5, 
-      4:1
-    }[val]
 
 
 #Defining formatting data method
@@ -48,7 +40,7 @@ node_data = format_data(df)
 
 skel = GraphSkeleton()
 #load structure of our net
-skel.load("./skel-learned2.txt")
+skel.load("./skel-learned.txt")
 #setting the topologic order
 skel.toporder()
 #learner which will estimate parameters e if needed net structure
@@ -115,14 +107,14 @@ for score in range(1,6):
         #choose the max probability ditribution as model prediction
         maxvalue = max(result.vals)
 
-        pos = GetRealValueLast(result.vals.index(maxvalue))
-    
+        pos = result.vals.index(maxvalue)
+        pos= res.Vdata["Overall"]["vals"][pos]
         #append it to our prediction list
-        pred.append(pos + 1)
+        pred.append(pos)
         print(count)
         count = count + 1
     #print performances on the performances.csv file
-    with open("performances3.csv", "a") as f:
+    with open("performancesLearned.csv", "a") as f:
         f.write("ACCURACY of the "+str(score)+"th score: "+str(accuracy_score(target, pred))+'\n')
         f.write("PRECISION of the "+str(score)+"th score: "+str(precision_score(target, pred, average = 'macro'))+'\n')
         f.write("RECALL of the "+str(score)+"th score: "+str(recall_score(target, pred, average = 'macro'))+'\n')
