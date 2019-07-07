@@ -35,7 +35,7 @@ def fun(inputData):
 
     skel = GraphSkeleton()
     #load structure of our net
-    skel.load("./skel-learned2.txt")
+    skel.load("./our-skel.txt")
     #setting the topologic order
     skel.toporder()
     #learner which will estimate parameters e if needed net structure
