@@ -47,20 +47,20 @@ def fun(inputData):
     # get CPT
     a = TableCPDFactorization(res)
     #compute the query and evidences as dicts
-    query = dict(Overall=inputData[0])
+    query = dict(Overall=1)
     # prepare dictionary of values (dopo gli uguali devi mettere i valori che leggi dalla GUI)
     
-    evidence = dict(Value = inputData[1],
-                    Location = inputData[2],
-                    Cleanliness = inputData[3],
-                    Service = inputData[4],
-                    Rooms = inputData[5],
-                    bad = inputData[6],
-                    old = inputData[7],
-                    good = inputData[8],
-                    great = inputData[9],
-                    comfortable = inputData[10],
-                    clean = inputData[11]
+    evidence = dict(Value = inputData[0],
+                    Location = inputData[1],
+                    Cleanliness = inputData[2],
+                    Service = inputData[3],
+                    Rooms = inputData[4],
+                    bad = inputData[5],
+                    old = inputData[6],
+                    good = inputData[7],
+                    great = inputData[8],
+                    comfortable = inputData[9],
+                    clean = inputData[10]
                     )
 
     print(query)
