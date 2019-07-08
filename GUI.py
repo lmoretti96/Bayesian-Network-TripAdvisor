@@ -26,7 +26,7 @@ class Example(QtGui.QWidget):
         self.service = QtGui.QLabel('Service')
         self.review = QtGui.QLabel('Review')
         self.result = QtGui.QLabel('')
-
+        self.n=0
         #Bottoni
         self.button = QtGui.QPushButton("Esegui")
         self.button.setEnabled(False)
@@ -79,6 +79,7 @@ class Example(QtGui.QWidget):
         
 
     def buttonClicked(self):
+        plt.close()
         sender = self.sender()
         #overall = self.overall.text()
         value = self.value.text()
@@ -117,8 +118,8 @@ class Example(QtGui.QWidget):
         plt.xticks(y_pos, objects)
         plt.ylabel("%")
         plt.title("Probability distribution")
-
         plt.show()
+       
 
 
     def editingFinished(self):
