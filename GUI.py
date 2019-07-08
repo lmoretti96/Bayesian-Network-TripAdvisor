@@ -5,6 +5,9 @@ from PyQt4 import QtGui
 from PyQt4.QtCore import pyqtSlot
 from GUIFunctions import fun
 import re
+import matplotlib.pyplot as plt; plt.rcdefaults()
+import numpy as np
+import matplotlib.pyplot as plt
 
 class Example(QtGui.QWidget):
     
@@ -96,8 +99,26 @@ class Example(QtGui.QWidget):
                 data.append(0)
         result = fun(data)
         strResult = "classe 1:\t" + str(round(float(result[1L])*100, 2))+" % " + "\n" + "classe 2:\t" + str(round(float(result[2L]*100), 2))+" %" + "\n" + "classe 3:\t" + str(round(float(result[3L]*100), 2))+" %" + "\n" + "classe 4:\t" + str(round(float(result[4L]*100), 2))+" %" + "\n" + "classe 5:\t" + str(round(float(result[5L]*100), 2))+" %"
-        print("eseguita funzione")
+        print("eseguita funzione")       
         self.result.setText(strResult)
+
+
+        objects = ("Classe 1", "Classe 2", "Classe 3", "Classe 4", "Classe 5")
+        y_pos = np.arange(len(objects))
+        performance = [
+                        round(float(result[1L])*100,2),
+                        round(float(result[2L])*100,2),
+                        round(float(result[3L])*100,2),
+                        round(float(result[4L])*100,2),
+                        round(float(result[5L])*100,2)
+                     ]
+
+        plt.bar(y_pos, performance, align="center", alpha=0.5)
+        plt.xticks(y_pos, objects)
+        plt.ylabel("%")
+        plt.title("Probability distribution")
+
+        plt.show()
 
 
     def editingFinished(self):
